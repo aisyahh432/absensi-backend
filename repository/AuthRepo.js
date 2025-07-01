@@ -1,4 +1,4 @@
-const User = require('../models/user-models');
+const User = require('../models/UserModels');
 const bcrypt = require('bcryptjs');
 const { db } = require('../config/firebase-admin');
 
@@ -21,7 +21,12 @@ module.exports = {
         const hashed = bcrypt.hashSync(password,10);
         return await User.create({nik,name,email,username,password: hashed,position,role,phone_number});
     },
-
+async deleteEmployeeByNik(nik) {
+    const result = await User.destroy({
+      where: { nik },
+    });
+    return result; 
+},
     async updateUser (nik, {name,email,password,position,role,username,phone_number,photo}){
         const user = await User.findByPk(nik);
         if (!user) throw new Error('User tidak ditemukan');

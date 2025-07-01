@@ -1,8 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const sequelize = require('./config/db');
-const authRoutes = require('./routes/auth-routes');
-const absenRoutes = require('./routes/absen-routes')
+const authRoutes = require('./routes/AuthRoutes');
+const absenRoutes = require('./routes/AbsenRoutes')
 const app = express();
 const bodyParser = require("body-parser");
 

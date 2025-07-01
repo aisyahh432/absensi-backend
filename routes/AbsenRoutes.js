@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const absenRepo = require('../repository/absen-repo')
+const absenRepo = require('../repository/AbsenRepo')
 
 router.post('/attendance',async(req,res) => {
 try {
@@ -35,8 +35,5 @@ router.post('/summary',async(req,res) => {
         res.status(500).json({error: error.message});
     }
 })  
-
-
-
 
 module.exports = router; 

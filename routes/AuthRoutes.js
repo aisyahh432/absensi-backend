@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const userRepo = require('../repository/auth-repo')
+const userRepo = require('../repository/AuthRepo')
 const { db } = require('../config/firebase-admin'); 
 
 // REGISTER
@@ -15,7 +15,6 @@ router.post('/register', async (req, res) => {
 });
 
 
-// LOGIN
 router.post('/login', async (req, res) => {
   const user = await userRepo.findByUsername(req.body.username);
   
@@ -70,9 +69,6 @@ router.post('/update', async (req, res) => {
 router.post('/logout', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
-
-    // Kalau kamu ingin blacklist token, bisa tambahkan logika di sini
-
     res.status(200).json({ message: 'Logout successful' });
   } catch (error) {
     console.error('Logout Error:', error.message);
@@ -80,4 +76,13 @@ router.post('/logout', async (req, res) => {
   }
 });
 
+router.post('/delete', async (req, res) => {
+  try {
+    const user = await userRepo.deleteEmployeeByNik(req.body.nik);
+    res.status(200).json({ message: 'Delete successful' });
+  } catch (error) {
+       res.status(400).json({ error: error.message });
+
+  }
+});
 module.exports = router;

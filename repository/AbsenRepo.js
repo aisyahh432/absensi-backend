@@ -1,6 +1,6 @@
-const Attendance = require('../models/absen-models');
+const Attendance = require('../models/AbsenModels');
 const { Op } = require('sequelize');
-const { all } = require('../routes/auth-routes');
+const { all } = require('../routes/AuthRoutes');
 module.exports ={
   async  createAttendance({ employee_nik, status }) {
   const now = new Date();
@@ -12,7 +12,6 @@ module.exports ={
     order: [['time', 'DESC']]
   });
 
-  // Validasi check-in dan check-out
   if (status === "check-in") {
     if (lastAttendance && lastAttendance.status === "check-in") {
       throw new Error("Anda sudah check-in hari ini, silakan check-out terlebih dahulu.");
